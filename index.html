@@ -867,13 +867,18 @@ bot(pick(["Oi! Eu sou a Explication. Pode me perguntar qualquer coisa ou pedir u
 segs();
 // ===== APIs reais (configure aqui) =====
 // dict: Free Dictionary API (https://dictionaryapi.dev), sem chave.
-// poll: Pollinations AI (https://gen.pollinations.ai), compatível com a API de chat da OpenAI.
-// key: opcional. Se a sua conta/limite do Pollinations exigir, crie uma chave em https://enter.pollinations.ai.
-// Atenção: qualquer chave colocada aqui fica visível no navegador. Prefira uma chave pública (publishable) ou um proxy no servidor.
-var API={dict:"https://api.dictionaryapi.dev/api/v2/entries",poll:"https://gen.pollinations.ai/v1/chat/completions",model:"openai",key:"",timeout:20000};
+// poll: Pollinations AI, API unificada (endpoint de texto simples): https://gen.pollinations.ai/text/{prompt}?key=SUA_CHAVE
+// ATENÇÃO: chaves "sk_" são secretas. Qualquer pessoa que abrir o site consegue ver esta chave no código.
+// Para proteger a chave, use um proxy no servidor (ex.: função da Vercel) ou uma chave pública (pk_).
+var API={dict:"https://api.dictionaryapi.dev/api/v2/entries",poll:"https://gen.pollinations.ai/text/",key:"sk_SPZ7DR0Y7zzyzFxPFbJsKsu0KduaSvwn",timeout:20000};
 var SAMPLE=null,busy=false;
-function llm(msgs){var ctl=new AbortController(),tm=setTimeout(function(){ctl.abort()},API.timeout),h={"Content-Type":"application/json"};if(API.key)h.Authorization="Bearer "+API.key;
-return fetch(API.poll,{method:"POST",headers:h,body:JSON.stringify({model:API.model,messages:msgs}),signal:ctl.signal}).then(function(r){clearTimeout(tm);if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(j){var t=j&&j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;if(!t)throw new Error("resposta vazia");return String(t).trim()})}
+// Monta o prompt (instrução oculta + conversa recente) e chama GET /text/{prompt}?key=...
+function llm(msgs,plain){var sys=msgs.filter(function(m){return m.role=="system"}).map(function(m){return m.content}).join("\n"),conv=msgs.filter(function(m){return m.role!="system"}),url="",n=8;
+for(;n>=1;n--){var p;if(plain)p=sys+"\n\nTexto:\n"+conv.map(function(m){return m.content}).join("\n");
+else p=sys+"\n\nConversa recente:\n"+conv.slice(-n).map(function(m){return(m.role=="user"?"Usuário: ":"Explication: ")+m.content.slice(0,300)}).join("\n")+"\n\nResponda somente à última mensagem do usuário, como a Explication, sem escrever o rótulo \"Explication:\".";
+url=API.poll+encodeURIComponent(p)+"?key="+encodeURIComponent(API.key);if(plain||url.length<=7000)break}
+var ctl=new AbortController(),tm=setTimeout(function(){ctl.abort()},API.timeout);
+return fetch(url,{signal:ctl.signal}).then(function(r){clearTimeout(tm);if(!r.ok)throw new Error("HTTP "+r.status);return r.text()}).then(function(t){t=String(t).trim().replace(/^Explication:\s*/i,"");if(!t)throw new Error("resposta vazia");return t})}
 // Instrução de sistema (prompt oculto) da Explication
 function sysChat(){var d=new Date(),b="Você é a Explication, a assistente inteligente do app Explain. Responda sempre em português do Brasil, de forma fluida, natural e simpática, como uma pessoa conversando: varie o jeito de começar e de terminar as respostas, evite frases repetitivas e fórmulas prontas, não use listas nem markdown e responda ao que foi dito. Pode fazer uma pergunta de volta de vez em quando. Explique de forma simples e correta "+(prem?"com mais detalhes (até 10 frases)":"em até 5 frases")+", com exemplos do dia a dia quando ajudar. Não invente fatos: se não souber, diga com naturalidade. Recuse com educação pedidos ofensivos ou perigosos. No máximo 1 emoji.";
 if(ceo)b="Você é a Explication, assistente de tecnologia ultra eficiente do app Explain. Trate o usuário como \"Chefe / Criador\". Responda sempre em português do Brasil, direto ao ponto, em até 3 frases, com precisão técnica e sem markdown, variando o jeito de começar as respostas. Não invente fatos.";
@@ -1177,7 +1182,7 @@ $("tcl").onclick=function(){$("src").value="";seen="";translate();$("src").focus
 var aiBusy=false;
 $("tai").onclick=function(){var t=$("src").value.trim();if(!t||aiBusy||from==to)return;var d=$("dst");if(BAD.test(k2(t))){d.className="box out";d.textContent=MSG;return}
 aiBusy=true;tick();d.className="box out";d.textContent="Traduzindo…";
-llm([{role:"system",content:"Você é um tradutor profissional. Traduza o texto do usuário de "+LANGS[from][1]+" para "+LANGS[to][1]+" de forma natural, mantendo sentido, tom e pontuação. Responda somente com a tradução, sem comentários, aspas ou explicações."},{role:"user",content:t}]).then(function(x){aiBusy=false;d.textContent=x;$("miss").textContent="✨ Tradução feita com IA."}).catch(function(){aiBusy=false;translate();$("miss").textContent="Não consegui usar a IA agora. Mostrando a tradução offline."})};
+llm([{role:"system",content:"Você é um tradutor profissional. Traduza o texto do usuário de "+LANGS[from][1]+" para "+LANGS[to][1]+" de forma natural, mantendo sentido, tom e pontuação. Responda somente com a tradução, sem comentários, aspas ou explicações."},{role:"user",content:t}],true).then(function(x){aiBusy=false;d.textContent=x;$("miss").textContent="✨ Tradução feita com IA."}).catch(function(){aiBusy=false;translate();$("miss").textContent="Não consegui usar a IA agora. Mostrando a tradução offline."})};
 $("tai").hidden=false;
 // Conversa com memória do assunto e falas variadas
 var LASTK=-1;
