@@ -125,10 +125,10 @@ nav button[aria-selected=true]{color:var(--ac)}
 <div class="chips" id="thint" style="margin-top:6px"></div>
 <div class="seg" style="margin-top:14px" role="group" aria-label="Idioma da tradução" id="toSeg"></div>
 <div id="dst" class="box out empty" aria-live="polite">A tradução aparece aqui</div>
-<div class="chips" id="tbtn"><button class="chip" id="tcp">Copiar</button><button class="chip" id="tsp">🔊 Ouvir</button><button class="chip" id="tai" hidden>✨ Melhorar com IA</button><button class="chip" id="tcl">✕ Limpar</button></div>
+<div class="chips" id="tbtn"><button class="chip" id="tcp">Copiar</button><button class="chip" id="tsp">🔊 Ouvir</button><button class="chip" id="tai" hidden>✨ Melhorar com IA</button><button class="chip" id="tcl">✕ Limpar</button><button class="chip" id="thtml">⬇ Salvar como HTML</button></div>
 <div class="sugs" id="ex" style="margin-top:10px"></div>
 <p class="note" id="miss" style="margin-top:0"></p>
-<p class="note">Tradução offline aproximada: entende frases comuns e mais de 470 palavras e expressões. Não ajusta gênero nem ordem das palavras. Para frases livres, use ✨ Melhorar com IA dentro do claude.ai.</p>
+<p class="note">Tradução offline aproximada: entende frases comuns e mais de 960 palavras e expressões. Não ajusta gênero nem ordem das palavras. Para frases livres, use ✨ Melhorar com IA dentro do claude.ai.</p>
 </section>
 <section id="s-ch">
 <h2>Conversa com Explication</h2>
@@ -186,6 +186,7 @@ nav button[aria-selected=true]{color:var(--ac)}
 <div id="sh" role="dialog" aria-label="Pergaminho"><div class="adc"><button class="x" id="shx" aria-label="Fechar">✕</button>
 <h3>📜 Salvar no Pergaminho</h3><p id="shc" style="margin-bottom:0"></p><div class="bar"><i id="shb"></i></div>
 <div class="fo" id="shf"></div><button class="btn" id="shs">Salvar esta conversa</button>
+<button class="btn ghost" id="shh" style="margin-top:8px;width:100%">Salvar como HTML</button>
 <p class="note" id="shn"></p><div class="sl" id="shl"></div></div></div>
 <div id="adm" role="dialog" aria-label="Painel Explications Dynamics">
 <div class="ah"><span class="ceob">CEO / DEV</span><button class="chip" id="admx">Fechar ✕</button></div>
@@ -675,7 +676,498 @@ você|you|tú|tu|je
 ela|she|ella|elle|ze
 eles|they|ellos|ils|ze
 fome|hunger|hambre|faim|honger
-sede|thirst|sed|soif|dorst`;
+sede|thirst|sed|soif|dorst
+vaca|cow|vaca|vache|koe
+porco|pig|cerdo|cochon|varken
+ovelha|sheep|oveja|mouton|schaap
+galinha|hen|gallina|poule|kip
+pato|duck|pato|canard|eend
+coelho|rabbit|conejo|lapin|konijn
+rato|mouse|ratón|souris|muis
+macaco|monkey|mono|singe|aap
+elefante|elephant|elefante|éléphant|olifant
+leão|lion|león|lion|leeuw
+tigre|tiger|tigre|tigre|tijger
+urso|bear|oso|ours|beer
+lobo|wolf|lobo|loup|wolf
+raposa|fox|zorro|renard|vos
+cobra|snake|serpiente|serpent|slang
+tartaruga|turtle|tortuga|tortue|schildpad
+sapo|toad|sapo|crapaud|pad
+golfinho|dolphin|delfín|dauphin|dolfijn
+baleia|whale|ballena|baleine|walvis
+tubarão|shark|tiburón|requin|haai
+borboleta|butterfly|mariposa|papillon|vlinder
+abelha|bee|abeja|abeille|bij
+formiga|ant|hormiga|fourmi|mier
+aranha|spider|araña|araignée|spin
+mosquito|mosquito|mosquito|moustique|mug
+mosca|fly|mosca|mouche|vlieg
+águia|eagle|águila|aigle|adelaar
+coruja|owl|búho|hibou|uil
+pinguim|penguin|pingüino|pingouin|pinguïn
+girafa|giraffe|jirafa|girafe|giraf
+camelo|camel|camello|chameau|kameel
+cabra|goat|cabra|chèvre|geit
+batata|potato|patata|pomme de terre|aardappel
+tomate|tomato|tomate|tomate|tomaat
+cebola|onion|cebolla|oignon|ui
+alho|garlic|ajo|ail|knoflook
+cenoura|carrot|zanahoria|carotte|wortel
+alface|lettuce|lechuga|laitue|sla
+milho|corn|maíz|maïs|maïs
+feijão|beans|frijoles|haricots|bonen
+macarrão|pasta|pasta|pâtes|pasta
+pizza|pizza|pizza|pizza|pizza
+sanduíche|sandwich|sándwich|sandwich|sandwich
+bolo|cake|pastel|gâteau|taart
+biscoito|cookie|galleta|biscuit|koekje
+chocolate|chocolate|chocolate|chocolat|chocolade
+sorvete|ice cream|helado|glace|ijs
+manteiga|butter|mantequilla|beurre|boter
+sopa|soup|sopa|soupe|soep
+presunto|ham|jamón|jambon|ham
+camarão|shrimp|camarón|crevette|garnaal
+torrada|toast|tostada|toast|toast
+mel|honey|miel|miel|honing
+sal|salt|sal|sel|zout
+pimenta|pepper|pimienta|poivre|peper
+azeite|olive oil|aceite de oliva|huile d'olive|olijfolie
+farinha|flour|harina|farine|bloem
+limão|lemon|limón|citron|citroen
+uva|grape|uva|raisin|druif
+morango|strawberry|fresa|fraise|aardbei
+abacaxi|pineapple|piña|ananas|ananas
+melancia|watermelon|sandía|pastèque|watermeloen
+pera|pear|pera|poire|peer
+abacate|avocado|aguacate|avocat|avocado
+amendoim|peanut|cacahuete|cacahuète|pinda
+refrigerante|soft drink|refresco|soda|frisdrank
+café da manhã|breakfast|desayuno|petit-déjeuner|ontbijt
+almoço|lunch|almuerzo|déjeuner|lunch
+jantar|dinner|cena|dîner|diner
+lanche|snack|merienda|goûter|snack
+sobremesa|dessert|postre|dessert|toetje
+garfo|fork|tenedor|fourchette|vork
+faca|knife|cuchillo|couteau|mes
+colher|spoon|cuchara|cuillère|lepel
+prato|plate|plato|assiette|bord
+copo|glass|vaso|verre|glas
+garrafa|bottle|botella|bouteille|fles
+nariz|nose|nariz|nez|neus
+orelha|ear|oreja|oreille|oor
+cabelo|hair|cabello|cheveux|haar
+rosto|face|cara|visage|gezicht
+pescoço|neck|cuello|cou|nek
+ombro|shoulder|hombro|épaule|schouder
+joelho|knee|rodilla|genou|knie
+dedo|finger|dedo|doigt|vinger
+pele|skin|piel|peau|huid
+osso|bone|hueso|os|bot
+cérebro|brain|cerebro|cerveau|hersenen
+barriga|belly|barriga|ventre|buik
+tosse|cough|tos|toux|hoest
+gripe|flu|gripe|grippe|griep
+resfriado|cold|resfriado|rhume|verkoudheid
+dor de cabeça|headache|dolor de cabeza|mal de tête|hoofdpijn
+dor de barriga|stomachache|dolor de estómago|mal au ventre|buikpijn
+receita|prescription|receta|ordonnance|recept
+vacina|vaccine|vacuna|vaccin|vaccin
+óculos|glasses|gafas|lunettes|bril
+dentista|dentist|dentista|dentiste|tandarts
+enfermeiro|nurse|enfermero|infirmier|verpleger
+paciente|patient|paciente|patient|patiënt
+pronto-socorro|emergency room|urgencias|urgences|spoedeisende hulp
+sofá|sofa|sofá|canapé|bank
+armário|cupboard|armario|armoire|kast
+geladeira|refrigerator|nevera|réfrigérateur|koelkast
+fogão|stove|cocina|cuisinière|fornuis
+forno|oven|horno|four|oven
+chuveiro|shower|ducha|douche|douche
+pia|sink|lavabo|évier|gootsteen
+espelho|mirror|espejo|miroir|spiegel
+chave|key|llave|clé|sleutel
+telhado|roof|techo|toit|dak
+parede|wall|pared|mur|muur
+chão|floor|suelo|sol|vloer
+teto|ceiling|techo|plafond|plafond
+jardim|garden|jardín|jardin|tuin
+garagem|garage|garaje|garage|garage
+escada|stairs|escalera|escalier|trap
+elevador|elevator|ascensor|ascenseur|lift
+tapete|rug|alfombra|tapis|tapijt
+cortina|curtain|cortina|rideau|gordijn
+travesseiro|pillow|almohada|oreiller|kussen
+cobertor|blanket|manta|couverture|deken
+toalha|towel|toalla|serviette de bain|handdoek
+sabonete|soap|jabón|savon|zeep
+escova de dentes|toothbrush|cepillo de dientes|brosse à dents|tandenborstel
+pasta de dente|toothpaste|pasta de dientes|dentifrice|tandpasta
+lâmpada|lamp|lámpara|lampe|lamp
+televisão|television|televisión|télévision|televisie
+rádio|radio|radio|radio|radio
+relógio|clock|reloj|horloge|klok
+carregador|charger|cargador|chargeur|oplader
+tomada|socket|enchufe|prise|stopcontact
+pilha|battery|pila|pile|batterij
+caneta|pen|bolígrafo|stylo|pen
+lápis|pencil|lápiz|crayon|potlood
+papel|paper|papel|papier|papier
+caderno|notebook|cuaderno|cahier|schrift
+mochila|backpack|mochila|sac à dos|rugzak
+bolsa|bag|bolso|sac|tas
+carteira|wallet|cartera|portefeuille|portemonnee
+guarda-chuva|umbrella|paraguas|parapluie|paraplu
+lanterna|flashlight|linterna|lampe de poche|zaklamp
+martelo|hammer|martillo|marteau|hamer
+tesoura|scissors|tijeras|ciseaux|schaar
+camisa|shirt|camisa|chemise|overhemd
+camiseta|t-shirt|camiseta|t-shirt|t-shirt
+calça|pants|pantalones|pantalon|broek
+saia|skirt|falda|jupe|rok
+vestido|dress|vestido|robe|jurk
+casaco|coat|abrigo|manteau|jas
+meia|sock|calcetín|chaussette|sok
+chapéu|hat|sombrero|chapeau|hoed
+cinto|belt|cinturón|ceinture|riem
+luva|glove|guante|gant|handschoen
+cachecol|scarf|bufanda|écharpe|sjaal
+pijama|pajamas|pijama|pyjama|pyjama
+tênis|sneakers|zapatillas|baskets|sportschoenen
+bota|boot|bota|botte|laars
+bicicleta|bicycle|bicicleta|vélo|fiets
+moto|motorcycle|moto|moto|motor
+caminhão|truck|camión|camion|vrachtwagen
+barco|boat|barco|bateau|boot
+navio|ship|buque|navire|schip
+helicóptero|helicopter|helicóptero|hélicoptère|helikopter
+ponte|bridge|puente|pont|brug
+esquina|corner|esquina|coin|hoek
+semáforo|traffic light|semáforo|feu rouge|verkeerslicht
+calçada|sidewalk|acera|trottoir|stoep
+estrada|road|carretera|route|weg
+rodovia|highway|autopista|autoroute|snelweg
+estacionamento|parking lot|estacionamiento|parking|parkeerplaats
+posto de gasolina|gas station|gasolinera|station-service|tankstation
+gasolina|gasoline|gasolina|essence|benzine
+praça|square|plaza|place|plein
+igreja|church|iglesia|église|kerk
+museu|museum|museo|musée|museum
+biblioteca|library|biblioteca|bibliothèque|bibliotheek
+cinema|movie theater|cine|cinéma|bioscoop
+teatro|theater|teatro|théâtre|theater
+padaria|bakery|panadería|boulangerie|bakkerij
+supermercado|supermarket|supermercado|supermarché|supermarkt
+delegacia|police station|comisaría|commissariat|politiebureau
+lago|lake|lago|lac|meer
+ilha|island|isla|île|eiland
+deserto|desert|desierto|désert|woestijn
+vale|valley|valle|vallée|vallei
+colina|hill|colina|colline|heuvel
+pedra|stone|piedra|pierre|steen
+areia|sand|arena|sable|zand
+folha|leaf|hoja|feuille|blad
+grama|grass|hierba|herbe|gras
+semente|seed|semilla|graine|zaad
+nuvem|cloud|nube|nuage|wolk
+tempestade|storm|tormenta|tempête|storm
+trovão|thunder|trueno|tonnerre|donder
+relâmpago|lightning|relámpago|éclair|bliksem
+neblina|fog|niebla|brouillard|mist
+gelo|ice|hielo|glace|ijs
+calor|heat|calor|chaleur|hitte
+verão|summer|verano|été|zomer
+inverno|winter|invierno|hiver|winter
+outono|autumn|otoño|automne|herfst
+primavera|spring|primavera|printemps|lente
+temperatura|temperature|temperatura|température|temperatuur
+ar|air|aire|air|lucht
+fumaça|smoke|humo|fumée|rook
+terremoto|earthquake|terremoto|tremblement de terre|aardbeving
+inundação|flood|inundación|inondation|overstroming
+seca|drought|sequía|sécheresse|droogte
+planeta|planet|planeta|planète|planeet
+universo|universe|universo|univers|heelal
+advogado|lawyer|abogado|avocat|advocaat
+engenheiro|engineer|ingeniero|ingénieur|ingenieur
+cozinheiro|cook|cocinero|cuisinier|kok
+padeiro|baker|panadero|boulanger|bakker
+motorista|driver|conductor|chauffeur|chauffeur
+piloto|pilot|piloto|pilote|piloot
+policial|police officer|policía|policier|politieagent
+bombeiro|firefighter|bombero|pompier|brandweerman
+juiz|judge|juez|juge|rechter
+artista|artist|artista|artiste|kunstenaar
+cantor|singer|cantante|chanteur|zanger
+escritor|writer|escritor|écrivain|schrijver
+aluno|pupil|alumno|élève|leerling
+estudante|student|estudiante|étudiant|student
+vizinho|neighbor|vecino|voisin|buurman
+chefe|boss|jefe|patron|baas
+cliente|customer|cliente|client|klant
+turista|tourist|turista|touriste|toerist
+estrangeiro|foreigner|extranjero|étranger|buitenlander
+marido|husband|marido|mari|echtgenoot
+esposa|wife|esposa|épouse|echtgenote
+avô|grandfather|abuelo|grand-père|opa
+tio|uncle|tío|oncle|oom
+tia|aunt|tía|tante|tante
+primo|cousin|primo|cousin|neef
+bebê|baby|bebé|bébé|baby
+aula|class|clase|cours|les
+prova|exam|examen|examen|examen
+nota|grade|nota|note|cijfer
+universidade|university|universidad|université|universiteit
+lição de casa|homework|tarea|devoirs|huiswerk
+reunião|meeting|reunión|réunion|vergadering
+emprego|job|empleo|emploi|baan
+salário|salary|salario|salaire|salaris
+empresa|company|empresa|entreprise|bedrijf
+contrato|contract|contrato|contrat|contract
+entrevista|interview|entrevista|entretien|interview
+internet|internet|internet|internet|internet
+e-mail|email|correo electrónico|e-mail|e-mail
+senha|password|contraseña|mot de passe|wachtwoord
+arquivo|file|archivo|fichier|bestand
+tela|screen|pantalla|écran|scherm
+teclado|keyboard|teclado|clavier|toetsenbord
+impressora|printer|impresora|imprimante|printer
+foto|photo|foto|photo|foto
+vídeo|video|vídeo|vidéo|video
+zangado|angry|enfadado|en colère|boos
+assustado|scared|asustado|effrayé|bang
+surpreso|surprised|sorprendido|surpris|verrast
+orgulhoso|proud|orgulloso|fier|trots
+envergonhado|embarrassed|avergonzado|gêné|beschaamd
+ocupado|busy|ocupado|occupé|druk
+livre|free|libre|libre|vrij
+sozinho|alone|solo|seul|alleen
+juntos|together|juntos|ensemble|samen
+amável|kind|amable|aimable|vriendelijk
+engraçado|funny|gracioso|drôle|grappig
+inteligente|smart|inteligente|intelligent|slim
+forte|strong|fuerte|fort|sterk
+fraco|weak|débil|faible|zwak
+gordo|fat|gordo|gros|dik
+magro|thin|delgado|mince|dun
+jovem|young|joven|jeune|jong
+rico|rich|rico|riche|rijk
+pobre|poor|pobre|pauvre|arm
+seguro|safe|seguro|sûr|veilig
+perigoso|dangerous|peligroso|dangereux|gevaarlijk
+limpo|clean|limpio|propre|schoon
+sujo|dirty|sucio|sale|vuil
+molhado|wet|mojado|mouillé|nat
+seco|dry|seco|sec|droog
+aberto|open|abierto|ouvert|open
+fechado|closed|cerrado|fermé|gesloten
+cheio|full|lleno|plein|vol
+vazio|empty|vacío|vide|leeg
+pesado|heavy|pesado|lourd|zwaar
+leve|light|ligero|léger|licht
+macio|soft|suave|doux|zacht
+duro|hard|duro|dur|hard
+doce|sweet|dulce|sucré|zoet
+salgado|salty|salado|salé|zoutig
+amargo|bitter|amargo|amer|bitter
+picante|spicy|picante|épicé|pittig
+delicioso|delicious|delicioso|délicieux|heerlijk
+gostoso|tasty|sabroso|savoureux|lekker
+interessante|interesting|interesante|intéressant|interessant
+chato|boring|aburrido|ennuyeux|saai
+estranho|strange|extraño|étrange|vreemd
+famoso|famous|famoso|célèbre|beroemd
+abraçar|to hug|abrazar|serrer dans ses bras|omhelzen
+acordar|to wake up|despertar|se réveiller|wakker worden
+levantar|to get up|levantarse|se lever|opstaan
+sentar|to sit|sentarse|s'asseoir|zitten
+deitar|to lie down|acostarse|s'allonger|liggen
+dirigir|to drive|conducir|conduire|rijden
+voar|to fly|volar|voler|vliegen
+nadar|to swim|nadar|nager|zwemmen
+pular|to jump|saltar|sauter|springen
+cair|to fall|caer|tomber|vallen
+quebrar|to break|romper|casser|breken
+cortar|to cut|cortar|couper|snijden
+cozinhar|to cook|cocinar|cuisiner|koken
+lavar|to wash|lavar|laver|wassen
+limpar|to clean|limpiar|nettoyer|schoonmaken
+arrumar|to tidy|ordenar|ranger|opruimen
+pintar|to paint|pintar|peindre|schilderen
+desenhar|to draw|dibujar|dessiner|tekenen
+escolher|to choose|elegir|choisir|kiezen
+decidir|to decide|decidir|décider|beslissen
+tentar|to try|intentar|essayer|proberen
+ganhar|to win|ganar|gagner|winnen
+mudar|to change|cambiar|changer|veranderen
+mostrar|to show|mostrar|montrer|laten zien
+explicar|to explain|explicar|expliquer|uitleggen
+responder|to answer|responder|répondre|antwoorden
+perguntar|to ask|preguntar|demander|vragen
+gritar|to shout|gritar|crier|schreeuwen
+sorrir|to smile|sonreír|sourire|glimlachen
+rir|to laugh|reír|rire|lachen
+chorar|to cry|llorar|pleurer|huilen
+odiar|to hate|odiar|détester|haten
+preferir|to prefer|preferir|préférer|verkiezen
+enviar|to send|enviar|envoyer|sturen
+receber|to receive|recibir|recevoir|ontvangen
+emprestar|to lend|prestar|prêter|uitlenen
+devolver|to give back|devolver|rendre|teruggeven
+guardar|to keep|guardar|garder|bewaren
+encontrar|to find|encontrar|trouver|vinden
+esconder|to hide|esconder|cacher|verbergen
+empurrar|to push|empujar|pousser|duwen
+puxar|to pull|tirar|tirer|trekken
+carregar|to carry|llevar|porter|dragen
+segurar|to hold|sostener|tenir|vasthouden
+tocar|to touch|tocar|toucher|aanraken
+cheirar|to smell|oler|sentir|ruiken
+provar|to taste|probar|goûter|proeven
+olhar|to look|mirar|regarder|kijken
+escutar|to listen|escuchar|écouter|luisteren
+visitar|to visit|visitar|visiter|bezoeken
+casar|to marry|casarse|se marier|trouwen
+nascer|to be born|nacer|naître|geboren worden
+morrer|to die|morir|mourir|sterven
+crescer|to grow|crecer|grandir|groeien
+minuto|minute|minuto|minute|minuut
+segundo|second|segundo|seconde|seconde
+meia-noite|midnight|medianoche|minuit|middernacht
+cedo|early|temprano|tôt|vroeg
+às vezes|sometimes|a veces|parfois|soms
+frequentemente|often|a menudo|souvent|vaak
+raramente|rarely|raramente|rarement|zelden
+geralmente|usually|generalmente|généralement|meestal
+logo|soon|pronto|bientôt|binnenkort
+certamente|certainly|ciertamente|certainement|zeker
+provavelmente|probably|probablemente|probablement|waarschijnlijk
+apenas|merely|solamente|seulement|slechts
+quase|almost|casi|presque|bijna
+bastante|quite|bastante|assez|tamelijk
+demais|too much|demasiado|trop|te veel
+tanto|so much|tanto|tant|zoveel
+muitos|many|muchos|beaucoup de|veel
+alguns|some|algunos|quelques|enkele
+nenhum|none|ninguno|aucun|geen
+ambos|both|ambos|les deux|beide
+metade|half|mitad|moitié|helft
+dobro|double|doble|double|dubbel
+terceiro|third|tercero|troisième|derde
+milhão|million|millón|million|miljoen
+quinze|fifteen|quince|quinze|vijftien
+treze|thirteen|trece|treize|dertien
+catorze|fourteen|catorce|quatorze|veertien
+dezesseis|sixteen|dieciséis|seize|zestien
+dezessete|seventeen|diecisiete|dix-sept|zeventien
+dezoito|eighteen|dieciocho|dix-huit|achttien
+dezenove|nineteen|diecinueve|dix-neuf|negentien
+quarenta|forty|cuarenta|quarante|veertig
+sessenta|sixty|sesenta|soixante|zestig
+setenta|seventy|setenta|soixante-dix|zeventig
+oitenta|eighty|ochenta|quatre-vingts|tachtig
+noventa|ninety|noventa|quatre-vingt-dix|negentig
+janeiro|January|enero|janvier|januari
+fevereiro|February|febrero|février|februari
+março|March|marzo|mars|maart
+abril|April|abril|avril|april
+maio|May|mayo|mai|mei
+junho|June|junio|juin|juni
+julho|July|julio|juillet|juli
+agosto|August|agosto|août|augustus
+setembro|September|septiembre|septembre|september
+outubro|October|octubre|octobre|oktober
+novembro|November|noviembre|novembre|november
+dezembro|December|diciembre|décembre|december
+laranja|orange|naranja|orange|oranje
+rosa|pink|rosa|rose|roze
+roxo|purple|morado|violet|paars
+marrom|brown|marrón|marron|bruin
+cinza|gray|gris|gris|grijs
+dourado|gold|dorado|doré|goud
+prata|silver|plata|argent|zilver
+se|if|si|si|als
+então|then|entonces|alors|dan
+porém|however|sin embargo|cependant|echter
+embora|although|aunque|bien que|hoewel
+enquanto|while|mientras|pendant que|terwijl
+por exemplo|for example|por ejemplo|par exemple|bijvoorbeeld
+ao lado de|next to|al lado de|à côté de|naast
+em cima de|on top of|encima de|sur|bovenop
+embaixo|under|debajo|sous|onder
+dentro|inside|dentro|dedans|binnen
+fora|outside|fuera|dehors|buiten
+atrás|behind|detrás|derrière|achter
+na frente de|in front of|delante de|devant|voor
+ao redor|around|alrededor|autour|rond
+através|through|a través|à travers|door
+contra|against|contra|contre|tegen
+cima|up|arriba|haut|omhoog
+baixo|down|abajo|bas|omlaag
+bom apetite|enjoy your meal|buen provecho|bon appétit|smakelijk eten
+boa viagem|have a good trip|buen viaje|bon voyage|goede reis
+bom fim de semana|have a nice weekend|buen fin de semana|bon week-end|fijn weekend
+sinto muito|I am sorry|lo siento|je suis désolé|het spijt me
+não se preocupe|do not worry|no te preocupes|ne vous inquiétez pas|maak je geen zorgen
+está bem|it is okay|está bien|c'est bon|het is goed
+eu concordo|I agree|estoy de acuerdo|je suis d'accord|ik ben het eens
+eu não concordo|I disagree|no estoy de acuerdo|je ne suis pas d'accord|ik ben het niet eens
+eu acho que|I think that|creo que|je pense que|ik denk dat
+eu esqueci|I forgot|se me olvidó|j'ai oublié|ik ben het vergeten
+eu entendi|I understood|entendí|j'ai compris|ik heb het begrepen
+fale devagar|speak slowly|habla despacio|parlez lentement|praat langzaam
+eu estou aprendendo|I am learning|estoy aprendiendo|j'apprends|ik leer
+eu estou com frio|I am cold|tengo frío|j'ai froid|ik heb het koud
+eu estou com calor|I am hot|tengo calor|j'ai chaud|ik heb het warm
+eu estou com sono|I am sleepy|tengo sueño|j'ai sommeil|ik ben slaperig
+onde você mora|where do you live|dónde vives|où habites-tu|waar woon je
+quantos anos você tem|how old are you|cuántos años tienes|quel âge as-tu|hoe oud ben je
+de onde você é|where are you from|de dónde eres|d'où viens-tu|waar kom je vandaan
+eu sou do brasil|I am from Brazil|soy de Brasil|je viens du Brésil|ik kom uit Brazilië
+qual é o seu telefone|what is your phone number|cuál es tu teléfono|quel est ton numéro de téléphone|wat is je telefoonnummer
+onde posso comprar|where can I buy|dónde puedo comprar|où puis-je acheter|waar kan ik kopen
+eu quero comprar|I want to buy|quiero comprar|je veux acheter|ik wil kopen
+tem desconto|is there a discount|hay descuento|y a-t-il une réduction|is er korting
+eu quero pagar|I want to pay|quiero pagar|je veux payer|ik wil betalen
+quanto é|how much is it|cuánto es|c'est combien|hoeveel is het
+está caro|it is expensive|está caro|c'est cher|het is duur
+onde fica a estação|where is the station|dónde está la estación|où est la gare|waar is het station
+onde fica o aeroporto|where is the airport|dónde está el aeropuerto|où est l'aéroport|waar is de luchthaven
+onde fica o hotel|where is the hotel|dónde está el hotel|où est l'hôtel|waar is het hotel
+a que horas abre|what time does it open|a qué hora abre|à quelle heure ça ouvre|hoe laat gaat het open
+a que horas fecha|what time does it close|a qué hora cierra|à quelle heure ça ferme|hoe laat sluit het
+trânsito|traffic|tráfico|circulation|verkeer
+multa|fine|multa|amende|boete
+fila|line|fila|file d'attente|rij
+lugar|place|lugar|endroit|plaats
+reserva|reservation|reserva|réservation|reservering
+recepção|reception|recepción|réception|receptie
+piscina|pool|piscina|piscine|zwembad
+ingresso|ticket|entrada|billet|toegangskaart
+festa|party|fiesta|fête|feest
+presente|gift|regalo|cadeau|cadeau
+casamento|wedding|boda|mariage|bruiloft
+aniversário|birthday|cumpleaños|anniversaire|verjaardag
+férias|vacation|vacaciones|vacances|vakantie
+esporte|sport|deporte|sport|sport
+futebol|soccer|fútbol|football|voetbal
+bola|ball|pelota|ballon|bal
+time|team|equipo|équipe|team
+jogador|player|jugador|joueur|speler
+corrida|race|carrera|course|race
+academia|gym|gimnasio|salle de sport|sportschool
+liberdade|freedom|libertad|liberté|vrijheid
+paz|peace|paz|paix|vrede
+guerra|war|guerra|guerre|oorlog
+governo|government|gobierno|gouvernement|regering
+lei|law|ley|loi|wet
+cidadão|citizen|ciudadano|citoyen|burger
+notícia|news|noticia|nouvelle|nieuws
+jornal|newspaper|periódico|journal|krant
+revista|magazine|revista|magazine|tijdschrift
+história|story|historia|histoire|verhaal
+ciência|science|ciencia|science|wetenschap
+arte|art|arte|art|kunst`;
 var D=RAW.split("\n").map(function(l){return l.split("|")});
 function k1(s){return s.toLowerCase().replace(/[’]/g,"'").replace(/[^a-zà-ÿœ0-9' -]/g,"").replace(/\s+/g," ").trim()}
 function k2(s){return k1(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
@@ -1377,6 +1869,15 @@ var t=convTime(n);if(t!==null){SRC="conv";LASTK=-1;return t}
 if(!ceo&&!ents(n).length){var c=convChat(q,n0,n);if(c!==null){SRC="conv";CM.listen=0;if(RX.sad.test(n)===false)CM.sad=0;return c}}
 var a=reply5(q);if(a!==null)return a;
 if(!ceo&&!SAMPLE){var l=convListen(q,n);if(l!==null){SRC="conv";return l}}return null};
+// Salvar como HTML (baixa um arquivo .html com a conversa ou a tradução)
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function dlHTML(title,body,fn){var h='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(title)+'</title><style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:680px;margin:24px auto;padding:0 16px;line-height:1.5;color:#17181c;background:#fff}h1{font-size:22px;margin-bottom:4px}small{color:#6b6f7a}.m{padding:10px 14px;border-radius:16px;margin:8px 0;max-width:85%;white-space:pre-wrap}.bot{background:#f1f2f6}.me{background:#3346e0;color:#fff;margin-left:auto}.p{white-space:pre-wrap;background:#f1f2f6;padding:12px 14px;border-radius:12px}@media(prefers-color-scheme:dark){body{background:#151618;color:#f2f3f5}.bot,.p{background:#222328}.me{background:#9fb0ff;color:#111}}</style></head><body>'+body+'</body></html>';
+var b=new Blob([h],{type:"text/html;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function hoje(){return new Date().toISOString().slice(0,10)}
+$("shh").onclick=function(){var ms=[].slice.call(document.querySelectorAll("#msgs .m")).map(function(e){return'<div class="m '+(e.classList.contains("me")?"me":"bot")+'">'+esc(e.textContent)+'</div>'}).join("");
+dlHTML("Conversa com a Explication",'<h1>Conversa com a Explication</h1><small>Explain · '+hoje()+'</small>'+ms,"explain-conversa-"+hoje()+".html")};
+$("thtml").onclick=function(){var d=$("dst");if(d.classList.contains("empty")||!$("src").value.trim())return;
+dlHTML("Tradução",'<h1>Tradução</h1><small>'+esc(LANGS[from][1])+' → '+esc(LANGS[to][1])+' · Explain · '+hoje()+'</small><h3>Original</h3><div class="p">'+esc($("src").value)+'</div><h3>Tradução</h3><div class="p">'+esc(d.textContent)+'</div>',"explain-traducao-"+hoje()+".html")};
 // Manifesto PWA (instalação depende de hospedagem com service worker)
 try{var ic="data:image/png;base64,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";
 var m={name:"Explain",short_name:"Explain",display:"standalone",start_url:".",background_color:"#ffffff",theme_color:"#3346e0",icons:[{src:ic,sizes:"512x512",type:"image/png",purpose:"any"},{src:ic,sizes:"512x512",type:"image/png",purpose:"maskable"}]};
