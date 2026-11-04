@@ -125,10 +125,10 @@ nav button[aria-selected=true]{color:var(--ac)}
 <div class="chips" id="thint" style="margin-top:6px"></div>
 <div class="seg" style="margin-top:14px" role="group" aria-label="Idioma da tradução" id="toSeg"></div>
 <div id="dst" class="box out empty" aria-live="polite">A tradução aparece aqui</div>
-<div class="chips" id="tbtn"><button class="chip" id="tcp">Copiar</button><button class="chip" id="tsp">🔊 Ouvir</button><button class="chip" id="tai" hidden>✨ Melhorar com IA</button><button class="chip" id="tcl">✕ Limpar</button><button class="chip" id="thtml">⬇ Salvar como HTML</button></div>
+<div class="chips" id="tbtn"><button class="chip" id="tcp">Copiar</button><button class="chip" id="tsp">🔊 Ouvir</button><button class="chip" id="tai" hidden>✨ Melhorar com IA</button><button class="chip" id="tcl">✕ Limpar</button></div>
 <div class="sugs" id="ex" style="margin-top:10px"></div>
 <p class="note" id="miss" style="margin-top:0"></p>
-<p class="note">Tradução offline aproximada: entende frases comuns e mais de 960 palavras e expressões. Não ajusta gênero nem ordem das palavras. Para frases livres, use ✨ Melhorar com IA dentro do claude.ai.</p>
+<p class="note">Tradução offline aproximada: entende frases comuns e mais de 1320 palavras e expressões. Não ajusta gênero nem ordem das palavras. Para frases livres, use ✨ Melhorar com IA dentro do claude.ai.</p>
 </section>
 <section id="s-ch">
 <h2>Conversa com Explication</h2>
@@ -186,7 +186,6 @@ nav button[aria-selected=true]{color:var(--ac)}
 <div id="sh" role="dialog" aria-label="Pergaminho"><div class="adc"><button class="x" id="shx" aria-label="Fechar">✕</button>
 <h3>📜 Salvar no Pergaminho</h3><p id="shc" style="margin-bottom:0"></p><div class="bar"><i id="shb"></i></div>
 <div class="fo" id="shf"></div><button class="btn" id="shs">Salvar esta conversa</button>
-<button class="btn ghost" id="shh" style="margin-top:8px;width:100%">Salvar como HTML</button>
 <p class="note" id="shn"></p><div class="sl" id="shl"></div></div></div>
 <div id="adm" role="dialog" aria-label="Painel Explications Dynamics">
 <div class="ah"><span class="ceob">CEO / DEV</span><button class="chip" id="admx">Fechar ✕</button></div>
@@ -1167,7 +1166,360 @@ jornal|newspaper|periódico|journal|krant
 revista|magazine|revista|magazine|tijdschrift
 história|story|historia|histoire|verhaal
 ciência|science|ciencia|science|wetenschap
-arte|art|arte|art|kunst`;
+arte|art|arte|art|kunst
+estão|are|están|sont|zijn
+estamos|we are|estamos|nous sommes|wij zijn
+somos|we are|somos|nous sommes|wij zijn
+foram|were|fueron|étaient|waren
+era|was|era|était|was
+temos|we have|tenemos|nous avons|wij hebben
+tinha|had|tenía|avait|had
+faz|does|hace|fait|doet
+pode|can|puede|peut|kan
+podemos|we can|podemos|nous pouvons|wij kunnen
+quer|wants|quiere|veut|wil
+queremos|we want|queremos|nous voulons|wij willen
+gosta|likes|gusta|aime|houdt van
+vai|goes|va|va|gaat
+vamos|let us go|vamos|allons-y|laten we gaan
+vem|comes|viene|vient|komt
+venha|come|ven|viens|kom
+vir|to come|venir|venir|komen
+diz|says|dice|dit|zegt
+sabe|knows|sabe|sait|weet
+precisa|needs|necesita|a besoin|heeft nodig
+fala|speaks|habla|parle|spreekt
+mora|lives|vive|habite|woont
+trabalha|works|trabaja|travaille|werkt
+estuda|studies|estudia|étudie|studeert
+seu|your|tu|ton|jouw
+sua|your|tu|ta|jouw
+dele|his|su|son|zijn
+dela|her|su|sa|haar
+nosso|our|nuestro|notre|ons
+nossa|our|nuestra|notre|onze
+esse|that|ese|ce|die
+essa|that|esa|cette|die
+este|this|este|ce|deze
+aquele|that one|aquel|celui-là|die
+me|me|me|me|me
+te|you|te|te|je
+mim|me|mí|moi|mij
+qualquer|any|cualquier|n'importe quel|elke
+outra|other|otra|autre|andere
+vários|several|varios|plusieurs|meerdere
+mesma|same|misma|même|zelfde
+próprio|own|propio|propre|eigen
+inteiro|whole|entero|entier|hele
+diferença|difference|diferencia|différence|verschil
+no|in the|en el|dans le|in het
+na|in the|en la|dans la|in de
+do|of the|del|du|van het
+ao|to the|al|au|naar het
+pelo|by the|por el|par le|door het
+sob|beneath|bajo|sous|onder
+perante|before|ante|devant|voor
+conforme|according to|según|selon|volgens
+nem|nor|ni|ni|noch
+pois|since|pues|car|want
+lá|over there|allá|là-bas|daarginds
+aí|there|ahí|là|daar
+depressa|quickly|rápido|vite|snel
+devagar|slowly|despacio|lentement|langzaam
+jamais|never ever|jamás|jamais|nooit
+de repente|suddenly|de repente|soudain|plotseling
+de manhã|in the morning|por la mañana|le matin|'s ochtends
+à tarde|in the afternoon|por la tarde|l'après-midi|'s middags
+à noite|at night|por la noche|la nuit|'s nachts
+toda hora|all the time|a toda hora|tout le temps|de hele tijd
+todo dia|every day|todos los días|tous les jours|elke dag
+semana que vem|next week|la semana que viene|la semaine prochaine|volgende week
+mês que vem|next month|el mes que viene|le mois prochain|volgende maand
+ano passado|last year|el año pasado|l'année dernière|vorig jaar
+semana passada|last week|la semana pasada|la semaine dernière|vorige week
+anteontem|the day before yesterday|anteayer|avant-hier|eergisteren
+depois de amanhã|the day after tomorrow|pasado mañana|après-demain|overmorgen
+dança|dance|baile|danse|dans
+pintura|painting|pintura|peinture|schilderij
+desenho|drawing|dibujo|dessin|tekening
+fotografia|photography|fotografía|photographie|fotografie
+acampar|to camp|acampar|camper|kamperen
+pescar|to fish|pescar|pêcher|vissen
+caçar|to hunt|cazar|chasser|jagen
+vôlei|volleyball|voleibol|volleyball|volleybal
+basquete|basketball|baloncesto|basketball|basketbal
+ciclismo|cycling|ciclismo|cyclisme|wielrennen
+xadrez|chess|ajedrez|échecs|schaken
+cartas|cards|cartas|cartes|kaarten
+brinquedo|toy|juguete|jouet|speelgoed
+boneca|doll|muñeca|poupée|pop
+parque de diversões|amusement park|parque de atracciones|parc d'attractions|pretpark
+zoológico|zoo|zoológico|zoo|dierentuin
+circo|circus|circo|cirque|circus
+show|concert|concierto|concert|concert
+banda|band|banda|groupe|band
+violão|guitar|guitarra|guitare|gitaar
+piano|piano|piano|piano|piano
+violino|violin|violín|violon|viool
+canção|song|canción|chanson|lied
+poema|poem|poema|poème|gedicht
+romance|novel|novela|roman|roman
+piada|joke|chiste|blague|grap
+américa|America|América|Amérique|Amerika
+europa|Europe|Europa|Europe|Europa
+ásia|Asia|Asia|Asie|Azië
+áfrica|Africa|África|Afrique|Afrika
+oceania|Oceania|Oceanía|Océanie|Oceanië
+estados unidos|United States|Estados Unidos|États-Unis|Verenigde Staten
+canadá|Canada|Canadá|Canada|Canada
+méxico|Mexico|México|Mexique|Mexico
+argentina|Argentina|Argentina|Argentine|Argentinië
+chile|Chile|Chile|Chili|Chili
+colômbia|Colombia|Colombia|Colombie|Colombia
+peru|Peru|Perú|Pérou|Peru
+venezuela|Venezuela|Venezuela|Venezuela|Venezuela
+uruguai|Uruguay|Uruguay|Uruguay|Uruguay
+paraguai|Paraguay|Paraguay|Paraguay|Paraguay
+bolívia|Bolivia|Bolivia|Bolivie|Bolivia
+equador|Ecuador|Ecuador|Équateur|Ecuador
+cuba|Cuba|Cuba|Cuba|Cuba
+haiti|Haiti|Haití|Haïti|Haïti
+portugal|Portugal|Portugal|Portugal|Portugal
+espanha|Spain|España|Espagne|Spanje
+frança|France|Francia|France|Frankrijk
+alemanha|Germany|Alemania|Allemagne|Duitsland
+itália|Italy|Italia|Italie|Italië
+inglaterra|England|Inglaterra|Angleterre|Engeland
+holanda|Netherlands|Países Bajos|Pays-Bas|Nederland
+suriname|Suriname|Surinam|Suriname|Suriname
+japão|Japan|Japón|Japon|Japan
+china|China|China|Chine|China
+índia|India|India|Inde|India
+rússia|Russia|Rusia|Russie|Rusland
+austrália|Australia|Australia|Australie|Australië
+egito|Egypt|Egipto|Égypte|Egypte
+holandês|Dutch|neerlandés|néerlandais|Nederlands
+alemão|German|alemán|allemand|Duits
+italiano|Italian|italiano|italien|Italiaans
+japonês|Japanese|japonés|japonais|Japans
+chinês|Chinese|chino|chinois|Chinees
+continente|continent|continente|continent|continent
+capital|capital|capital|capitale|hoofdstad
+estado|state|estado|état|staat
+vila|village|pueblo|village|dorp
+campo|field|campo|champ|veld
+fazenda|farm|granja|ferme|boerderij
+norte|north|norte|nord|noord
+sul|south|sur|sud|zuid
+leste|east|este|est|oost
+oeste|west|oeste|ouest|west
+fogueira|campfire|fogata|feu de camp|kampvuur
+barraca|tent|tienda de campaña|tente|tent
+cachoeira|waterfall|cascada|cascade|waterval
+caverna|cave|cueva|grotte|grot
+vulcão|volcano|volcán|volcan|vulkaan
+oceano|ocean|océano|océan|oceaan
+onda|wave|ola|vague|golf
+bairro|neighborhood|barrio|quartier|wijk
+região|region|región|région|regio
+ideia|idea|idea|idée|idee
+opinião|opinion|opinión|opinion|mening
+sentimento|feeling|sentimiento|sentiment|gevoel
+medo|fear|miedo|peur|angst
+alegria|joy|alegría|joie|vreugde
+tristeza|sadness|tristeza|tristesse|verdriet
+esperança|hope|esperanza|espoir|hoop
+sorte|luck|suerte|chance|geluk
+azar|bad luck|mala suerte|malchance|pech
+segredo|secret|secreto|secret|geheim
+mentira|lie|mentira|mensonge|leugen
+erro|mistake|error|erreur|vergissing
+chance|opportunity|oportunidad|opportunité|kans
+plano|plan|plan|plan|plan
+projeto|project|proyecto|projet|project
+objetivo|goal|objetivo|objectif|doel
+resultado|result|resultado|résultat|resultaat
+motivo|reason|motivo|raison|reden
+exemplo|example|ejemplo|exemple|voorbeeld
+tipo|type|tipo|type|soort
+parte|part|parte|partie|deel
+lado|side|lado|côté|kant
+meio|middle|medio|milieu|midden
+fim|end|fin|fin|einde
+começo|beginning|comienzo|début|begin
+número|number|número|numéro|nummer
+quantidade|amount|cantidad|quantité|hoeveelheid
+preço|price|precio|prix|prijs
+valor|value|valor|valeur|waarde
+tamanho|size|tamaño|taille|grootte
+peso|weight|peso|poids|gewicht
+altura|height|altura|hauteur|hoogte
+largura|width|ancho|largeur|breedte
+idade|age|edad|âge|leeftijd
+endereço|address|dirección|adresse|adres
+ferida|wound|herida|blessure|wond
+machucado|hurt|herido|blessé|gewond
+náusea|nausea|náusea|nausée|misselijkheid
+vômito|vomit|vómito|vomissement|braken
+diarreia|diarrhea|diarrea|diarrhée|diarree
+tontura|dizziness|mareo|vertige|duizeligheid
+desmaio|fainting|desmayo|évanouissement|flauwte
+queimadura|burn|quemadura|brûlure|brandwond
+fratura|fracture|fractura|fracture|breuk
+comprimido|pill|pastilla|comprimé|pil
+injeção|injection|inyección|injection|injectie
+exame|medical test|análisis|examen médical|onderzoek
+sintoma|symptom|síntoma|symptôme|symptoom
+doença|disease|enfermedad|maladie|ziekte
+seguro saúde|health insurance|seguro médico|assurance maladie|zorgverzekering
+alérgico|allergic|alérgico|allergique|allergisch
+grávida|pregnant|embarazada|enceinte|zwanger
+visto|visa|visado|visa|visum
+alfândega|customs|aduana|douane|douane
+fronteira|border|frontera|frontière|grens
+bagagem|luggage|equipaje|bagages|bagage
+voo|flight|vuelo|vol|vlucht
+portão|gate|puerta de embarque|porte|gate
+assento|seat|asiento|siège|zitplaats
+corredor|aisle|pasillo|couloir|gangpad
+atraso|delay|retraso|retard|vertraging
+cancelado|cancelled|cancelado|annulé|geannuleerd
+chegada|arrival|llegada|arrivée|aankomst
+partida|departure|salida|départ|vertrek
+ida|one way|ida|aller simple|enkele reis
+ida e volta|round trip|ida y vuelta|aller-retour|retour
+turismo|tourism|turismo|tourisme|toerisme
+guia|guide|guía|guide|gids
+hospedagem|accommodation|alojamiento|hébergement|accommodatie
+diária|nightly rate|tarifa por noche|tarif par nuit|prijs per nacht
+gorjeta|tip|propina|pourboire|fooi
+moeda|currency|moneda|monnaie|munteenheid
+dólar|dollar|dólar|dollar|dollar
+euro|euro|euro|euro|euro
+real|real|real|réal|real
+caixa eletrônico|ATM|cajero automático|distributeur|geldautomaat
+trocar|to exchange|cambiar|échanger|wisselen
+como assim|what do you mean|cómo así|comment ça|hoe bedoel je dat
+mais ou menos|so-so|más o menos|comme ci comme ça|zozo
+pode entrar|come in|pase|entrez|kom binnen
+um momento|one moment|un momento|un instant|een moment
+só um minuto|just a minute|un minuto|une minute|een minuutje
+eu preciso ir|I have to go|tengo que irme|je dois partir|ik moet gaan
+estou chegando|I am arriving|estoy llegando|j'arrive|ik kom eraan
+estou atrasado|I am late|llego tarde|je suis en retard|ik ben te laat
+não entendi|I did not understand|no entendí|je n'ai pas compris|ik heb het niet begrepen
+como se escreve|how do you spell it|cómo se escribe|comment ça s'écrit|hoe schrijf je dat
+o que significa|what does it mean|qué significa|qu'est-ce que ça veut dire|wat betekent het
+fale mais alto|speak louder|habla más alto|parlez plus fort|praat harder
+pode me dizer|can you tell me|puede decirme|pouvez-vous me dire|kunt u me zeggen
+eu gostaria de pedir|I would like to order|me gustaría pedir|je voudrais commander|ik wil graag bestellen
+uma mesa para dois|a table for two|una mesa para dos|une table pour deux|een tafel voor twee
+quero a conta|I want the bill|quiero la cuenta|je voudrais l'addition|mag ik de rekening
+sem açúcar|no sugar|sin azúcar|sans sucre|zonder suiker
+com gelo|with ice|con hielo|avec des glaçons|met ijs
+para viagem|to go|para llevar|à emporter|om mee te nemen
+lixo|trash|basura|poubelle|afval
+caixa|box|caja|boîte|doos
+sacola|shopping bag|bolsa de compras|sac de courses|boodschappentas
+carrinho|cart|carrito|chariot|winkelwagen
+correio|post office|correos|poste|postkantoor
+carta|letter|carta|lettre|brief
+encomenda|package|paquete|colis|pakket
+placa|sign|letrero|panneau|bord
+sinal|signal|señal|signal|signaal
+luz|light|luz|lumière|licht
+sombra|shadow|sombra|ombre|schaduw
+barulho|noise|ruido|bruit|lawaai
+silêncio|silence|silencio|silence|stilte
+cheiro|smell|olor|odeur|geur
+acabar|to finish off|acabar|achever|afronden
+continuar|to continue|continuar|continuer|doorgaan
+seguir|to follow|seguir|suivre|volgen
+deixar|to let|dejar|laisser|laten
+levar|to take along|llevar|emmener|meenemen
+trazer|to bring|traer|apporter|brengen
+colocar|to put|poner|mettre|zetten
+tirar|to take off|quitar|enlever|weghalen
+parecer|to seem|parecer|sembler|lijken
+existir|to exist|existir|exister|bestaan
+acontecer|to happen|ocurrir|arriver|gebeuren
+demorar|to take long|tardar|tarder|duren
+custar|to cost|costar|coûter|kosten
+valer|to be worth|valer|valoir|waard zijn
+desligar|to turn off|apagar|éteindre|uitzetten
+acender|to turn on|encender|allumer|aanzetten
+baixar|to download|descargar|télécharger|downloaden
+clicar|to click|hacer clic|cliquer|klikken
+digitar|to type|teclear|taper|typen
+salvar|to save|guardar|enregistrer|opslaan
+apagar|to delete|borrar|supprimer|verwijderen
+compartilhar|to share|compartir|partager|delen
+postar|to post|publicar|publier|plaatsen
+imaginar|to imagine|imaginar|imaginer|zich voorstellen
+acreditar|to believe|creer|croire|geloven
+duvidar|to doubt|dudar|douter|twijfelen
+concordar|to agree|estar de acuerdo|être d'accord|het eens zijn
+prometer|to promise|prometer|promettre|beloven
+convidar|to invite|invitar|inviter|uitnodigen
+aceitar|to accept|aceptar|accepter|accepteren
+recusar|to refuse|rechazar|refuser|weigeren
+permitir|to allow|permitir|permettre|toestaan
+proibir|to forbid|prohibir|interdire|verbieden
+evitar|to avoid|evitar|éviter|vermijden
+proteger|to protect|proteger|protéger|beschermen
+cuidar|to take care of|cuidar|soigner|zorgen voor
+curar|to heal|curar|guérir|genezen
+respirar|to breathe|respirar|respirer|ademen
+tossir|to cough|toser|tousser|hoesten
+suar|to sweat|sudar|transpirer|zweten
+treinar|to train|entrenar|s'entraîner|trainen
+participar|to take part|participar|participer|deelnemen
+vencer|to defeat|vencer|vaincre|verslaan
+perdoar|to forgive|perdonar|pardonner|vergeven
+agradecer|to thank|agradecer|remercier|bedanken
+cumprimentar|to greet|saludar|saluer|begroeten
+apresentar|to introduce|presentar|présenter|voorstellen
+sonhar|to dream|soñar|rêver|dromen
+largo|wide|ancho|large|breed
+estreito|narrow|estrecho|étroit|smal
+profundo|deep|profundo|profond|diep
+raso|shallow|poco profundo|peu profond|ondiep
+grosso|thick|grueso|épais|dik
+fino|slim|fino|fin|dun
+liso|smooth|liso|lisse|glad
+áspero|rough|áspero|rugueux|ruw
+brilhante|bright|brillante|brillant|helder
+escuro|dark|oscuro|sombre|donker
+silencioso|quiet|silencioso|silencieux|stil
+barulhento|noisy|ruidoso|bruyant|luidruchtig
+moderno|modern|moderno|moderne|modern
+simples|simple|simple|simple|eenvoudig
+complicado|complicated|complicado|compliqué|ingewikkeld
+possível|possible|posible|possible|mogelijk
+impossível|impossible|imposible|impossible|onmogelijk
+necessário|necessary|necesario|nécessaire|noodzakelijk
+útil|useful|útil|utile|nuttig
+grátis|free of charge|gratis|gratuit|gratis
+pronto|ready|listo|prêt|klaar
+atento|attentive|atento|attentif|attent
+curioso|curious|curioso|curieux|nieuwsgierig
+corajoso|brave|valiente|courageux|dapper
+preguiçoso|lazy|perezoso|paresseux|lui
+educado|polite|educado|poli|beleefd
+honesto|honest|honesto|honnête|eerlijk
+verdadeiro|true|verdadero|vrai|waar
+falso|false|falso|faux|onwaar
+ótimo|great|excelente|excellent|uitstekend
+péssimo|terrible|pésimo|terrible|verschrikkelijk
+incrível|incredible|increíble|incroyable|ongelooflijk
+normal|normal|normal|normal|normaal
+especial|special|especial|spécial|speciaal
+popular|popular|popular|populaire|populair
+público|public|público|public|openbaar
+particular|private|privado|privé|privé
+local|local|local|local|lokaal
+nacional|national|nacional|national|nationaal
+internacional|international|internacional|international|internationaal`;
 var D=RAW.split("\n").map(function(l){return l.split("|")});
 function k1(s){return s.toLowerCase().replace(/[’]/g,"'").replace(/[^a-zà-ÿœ0-9' -]/g,"").replace(/\s+/g," ").trim()}
 function k2(s){return k1(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
@@ -1869,15 +2221,6 @@ var t=convTime(n);if(t!==null){SRC="conv";LASTK=-1;return t}
 if(!ceo&&!ents(n).length){var c=convChat(q,n0,n);if(c!==null){SRC="conv";CM.listen=0;if(RX.sad.test(n)===false)CM.sad=0;return c}}
 var a=reply5(q);if(a!==null)return a;
 if(!ceo&&!SAMPLE){var l=convListen(q,n);if(l!==null){SRC="conv";return l}}return null};
-// Salvar como HTML (baixa um arquivo .html com a conversa ou a tradução)
-function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function dlHTML(title,body,fn){var h='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(title)+'</title><style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:680px;margin:24px auto;padding:0 16px;line-height:1.5;color:#17181c;background:#fff}h1{font-size:22px;margin-bottom:4px}small{color:#6b6f7a}.m{padding:10px 14px;border-radius:16px;margin:8px 0;max-width:85%;white-space:pre-wrap}.bot{background:#f1f2f6}.me{background:#3346e0;color:#fff;margin-left:auto}.p{white-space:pre-wrap;background:#f1f2f6;padding:12px 14px;border-radius:12px}@media(prefers-color-scheme:dark){body{background:#151618;color:#f2f3f5}.bot,.p{background:#222328}.me{background:#9fb0ff;color:#111}}</style></head><body>'+body+'</body></html>';
-var b=new Blob([h],{type:"text/html;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
-function hoje(){return new Date().toISOString().slice(0,10)}
-$("shh").onclick=function(){var ms=[].slice.call(document.querySelectorAll("#msgs .m")).map(function(e){return'<div class="m '+(e.classList.contains("me")?"me":"bot")+'">'+esc(e.textContent)+'</div>'}).join("");
-dlHTML("Conversa com a Explication",'<h1>Conversa com a Explication</h1><small>Explain · '+hoje()+'</small>'+ms,"explain-conversa-"+hoje()+".html")};
-$("thtml").onclick=function(){var d=$("dst");if(d.classList.contains("empty")||!$("src").value.trim())return;
-dlHTML("Tradução",'<h1>Tradução</h1><small>'+esc(LANGS[from][1])+' → '+esc(LANGS[to][1])+' · Explain · '+hoje()+'</small><h3>Original</h3><div class="p">'+esc($("src").value)+'</div><h3>Tradução</h3><div class="p">'+esc(d.textContent)+'</div>',"explain-traducao-"+hoje()+".html")};
 // Manifesto PWA (instalação depende de hospedagem com service worker)
 try{var ic="data:image/png;base64,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";
 var m={name:"Explain",short_name:"Explain",display:"standalone",start_url:".",background_color:"#ffffff",theme_color:"#3346e0",icons:[{src:ic,sizes:"512x512",type:"image/png",purpose:"any"},{src:ic,sizes:"512x512",type:"image/png",purpose:"maskable"}]};
