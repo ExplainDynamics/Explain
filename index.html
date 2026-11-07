@@ -107,6 +107,7 @@ nav button[aria-selected=true]{color:var(--ac)}
 .kg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.kc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .kc small{display:block;color:var(--mute);font-size:12px}.kc b{font:700 18px var(--serif)}.kc.t{border-color:#d9a21b}
 .fu{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+section>*{flex-shrink:0}#dcat{flex-wrap:wrap;overflow:visible}
 </style>
 </head>
 <body>
@@ -189,6 +190,7 @@ nav button[aria-selected=true]{color:var(--ac)}
 <div id="sh" role="dialog" aria-label="Pergaminho"><div class="adc"><button class="x" id="shx" aria-label="Fechar">✕</button>
 <h3>📜 Salvar no Pergaminho</h3><p id="shc" style="margin-bottom:0"></p><div class="bar"><i id="shb"></i></div>
 <div class="fo" id="shf"></div><button class="btn" id="shs">Salvar esta conversa</button>
+<button class="btn ghost" id="shnew" style="margin-top:8px;width:100%">＋ Nova conversa</button>
 <p class="note" id="shn"></p><div class="sl" id="shl"></div></div></div>
 <div id="adm" role="dialog" aria-label="Painel Explications Dynamics">
 <div class="ah"><span class="ceob">CEO / DEV</span><button class="chip" id="admx">Fechar ✕</button></div>
@@ -1915,18 +1917,45 @@ function fb(){if(ceo)return pick(["Chefe, sem dados offline sobre isso. Reformul
 function ask(t,ty){busy=true;var els=[].slice.call(document.querySelectorAll("#msgs .m")).slice(0,-1).slice(-8),ms=els.map(function(e){return{role:e.classList.contains("me")?"user":"assistant",content:e.textContent}});
 while(ms.length&&ms[0].role!="user")ms.shift();
 llm([{role:"system",content:sysChat()}].concat(ms)).then(function(r){ty.textContent=r;busy=false;tick();$("msgs").scrollTop=1e9}).catch(function(){busy=false;var a=reply(t);ty.remove();bot(a!==null?a:fb());tick()})}
-// Salvar no Pergaminho
-var FOLD=["Estudos","Histórias","Geral"],curF="Estudos",saved=[{t:"Como funciona a gravidade",f:"Estudos"},{t:"Aventura do dragão de papel",f:"Histórias"}];
+// Salvar no Pergaminho: chats salvos de verdade (abrir, renomear e apagar)
+var FOLD=["Estudos","Histórias","Geral"],curF="Estudos",saved=[],curId=null,editId=null,delId=null,openId=null,warn="";
+try{saved=JSON.parse(localStorage.getItem("exSaved")||"[]")}catch(e){saved=[]}
+if(!Array.isArray(saved))saved=[];
+function persist(){try{localStorage.setItem("exSaved",JSON.stringify(saved))}catch(e){}}
 function lim(){return prem?100:10}
-function renderSheet(){var n=saved.length,L=lim();$("shc").textContent=n+" de "+L+" chats salvos ("+(prem?"Premium":"plano gratuito")+")";$("shb").style.width=Math.min(100,n/L*100)+"%";
+function msgsNow(){return[].slice.call(document.querySelectorAll("#msgs .m")).filter(function(e){return e.textContent!="…"}).slice(-200).map(function(e){return{r:e.classList.contains("me")?"me":"bot",t:e.textContent.slice(0,2000)}})}
+function hasUser(){return msgsNow().some(function(m){return m.r=="me"})}
+function closeSheet(){$("sh").classList.remove("on")}
+function goChat(){document.querySelector('nav [data-t="s-ch"]').click()}
+function openChat(x){$("msgs").innerHTML="";x.m.forEach(function(m){add(m.r,m.t)});curId=x.id;openId=null;warn="";LASTK=-1;SRC="";closeSheet();goChat()}
+function newChat(){$("msgs").innerHTML="";curId=null;openId=null;warn="";LASTK=-1;SRC="";bot(pick(["Oi! Eu sou a Explication. Pode me perguntar qualquer coisa ou pedir uma piada. 😊","E aí, tudo bem? Sou a Explication. Sobre o que vamos conversar hoje?","Oi, oi! Tô aqui pra explicar, contar piada ou só bater papo. O que prefere? ✨"],"wl"));closeSheet();goChat()}
+function mkc(t,f){var b=document.createElement("button");b.className="chip";b.textContent=t;b.onclick=f;return b}
+function rowChat(x){var d=document.createElement("div");d.className="fu";
+if(editId==x.id){var i=document.createElement("input");i.value=x.t;i.maxLength=60;i.setAttribute("aria-label","Novo nome do chat");i.style.cssText="flex:1;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--fg);font:15px var(--sans)";
+var ok=function(){var v=i.value.trim();if(v)x.t=v.slice(0,60);editId=null;persist();renderSheet()};
+i.addEventListener("keydown",function(e){if(e.key=="Enter")ok();if(e.key=="Escape"){editId=null;renderSheet()}});
+d.appendChild(i);d.appendChild(mkc("✓ Salvar",ok));d.appendChild(mkc("✕",function(){editId=null;renderSheet()}));setTimeout(function(){try{i.focus();i.select()}catch(e){}},0);return d}
+var t=mkc((curId==x.id?"▶ ":"📜 ")+x.t,function(){if(hasUser()&&curId===null&&openId!=x.id){openId=x.id;warn="A conversa atual ainda não foi salva. Toque de novo para abrir este chat mesmo assim.";renderSheet()}else openChat(x)});
+t.style.cssText="flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap";t.setAttribute("aria-label","Abrir chat "+x.t);
+var r=mkc("✏️",function(){editId=x.id;delId=null;renderSheet()});r.setAttribute("aria-label","Renomear");
+var e=mkc(delId==x.id?"Confirmar?":"🗑️",function(){if(delId==x.id){saved=saved.filter(function(y){return y.id!=x.id});if(curId==x.id)curId=null;delId=null;persist();renderSheet()}else{delId=x.id;renderSheet();setTimeout(function(){if(delId==x.id){delId=null;renderSheet()}},4000)}});
+e.setAttribute("aria-label","Apagar chat");if(delId==x.id)e.style.borderColor="#d44";
+d.appendChild(t);d.appendChild(r);d.appendChild(e);return d}
+function renderSheet(){var n=saved.length,L=lim(),cur=curId?saved.filter(function(x){return x.id==curId})[0]:null;
+$("shc").textContent=n+" de "+L+" chats salvos ("+(prem?"Premium":"plano gratuito")+")";$("shb").style.width=Math.min(100,n/L*100)+"%";
 $("shf").innerHTML="";FOLD.forEach(function(f){var b=document.createElement("button");b.className="chip";b.textContent="📁 "+f;b.setAttribute("aria-pressed",f==curF);b.onclick=function(){curF=f;renderSheet()};$("shf").appendChild(b)});
-var l=$("shl");l.innerHTML="";FOLD.forEach(function(f){var it=saved.filter(function(x){return x.f==f});if(!it.length)return;var h=document.createElement("b");h.textContent="📁 "+f;l.appendChild(h);it.forEach(function(x){var d=document.createElement("div");d.textContent="📜 "+x.t;l.appendChild(d)})});
-var full=n>=L;$("shs").textContent=full&&!prem?"Ver Premium (até 100 chats)":"Salvar esta conversa";$("shs").disabled=full&&prem;
-$("shn").textContent=full?(prem?"Limite de 100 chats atingido.":"Limite do plano gratuito atingido: só é possível salvar até 10 chats."):(prem?"":"Plano gratuito: até 10 chats salvos. Com o Premium, até 100.")}
-$("saveBtn").onclick=function(){renderSheet();$("sh").classList.add("on")};
-$("shx").onclick=function(){$("sh").classList.remove("on")};
-$("shs").onclick=function(){if(saved.length>=lim()){if(!prem){$("sh").classList.remove("on");document.querySelector('nav [data-t="s-pr"]').click()}return}
-var f=document.querySelector("#msgs .m.me"),t=f?f.textContent.slice(0,32):"Conversa com a Explication";saved.push({t:t,f:curF});renderSheet()};
+var l=$("shl");l.innerHTML="";
+if(!n){var em=document.createElement("div");em.textContent="Nenhum chat salvo ainda. Toque em Salvar esta conversa.";l.appendChild(em)}
+FOLD.forEach(function(f){var it=saved.filter(function(x){return x.f==f});if(!it.length)return;var h=document.createElement("b");h.textContent="📁 "+f;l.appendChild(h);it.forEach(function(x){l.appendChild(rowChat(x))})});
+var full=n>=L&&!cur;$("shs").textContent=cur?"Atualizar o chat salvo":full&&!prem?"Ver Premium (até 100 chats)":"Salvar esta conversa";$("shs").disabled=full&&prem;
+$("shn").textContent=warn||(cur?"Você está no chat “"+cur.t+"”.":full?(prem?"Limite de 100 chats atingido.":"Limite do plano gratuito atingido: só é possível salvar até 10 chats."):(prem?"":"Plano gratuito: até 10 chats salvos. Com o Premium, até 100."))}
+$("saveBtn").onclick=function(){warn="";editId=null;delId=null;openId=null;renderSheet();$("sh").classList.add("on")};
+$("shx").onclick=closeSheet;
+$("shnew").onclick=newChat;
+$("shs").onclick=function(){var cur=curId?saved.filter(function(x){return x.id==curId})[0]:null,ms=msgsNow();
+if(cur){cur.m=ms;cur.d=Date.now();persist();warn="";renderSheet();$("shn").textContent="✅ Chat atualizado.";return}
+if(saved.length>=lim()){if(!prem){closeSheet();document.querySelector('nav [data-t="s-pr"]').click()}return}
+var f=ms.filter(function(m){return m.r=="me"})[0],id="c"+Date.now();saved.push({id:id,t:f?f.t.slice(0,32):"Conversa com a Explication",f:curF,m:ms,d:Date.now()});curId=id;persist();warn="";renderSheet()};
 var _sub=$("sub").onclick;$("sub").onclick=function(){_sub.call(this);renderSheet();renderPrem()};
 ["Eu quero um café, por favor.","Onde fica o banheiro?","Bom dia! Meu nome é Ana.","Eu amo música e filmes."].forEach(function(x){var b=document.createElement("button");b.className="chip";b.textContent=x;b.onclick=function(){from=0;segs();$("src").value=x;translate()};$("ex").appendChild(b)});
 // Dicionário
@@ -2306,7 +2335,7 @@ var TEL=`Antigua e Barbuda|🇦🇬|K|911|911 ou 999|||
 Argentina|🇦🇷|S|911|101|107|100|Defesa Civil 103; Incêndio florestal 105; Guarda Costeira 106; Violência contra a mulher 144; No celular, 112 redireciona ao 911
 Bahamas|🇧🇸|K|911 ou 919||||No celular: 112
 Barbados|🇧🇧|K||211|511|311|
-Belize|🇧??|C|911||||
+Belize|🇧🇿|C|911||||
 Bolívia|🇧🇴|S|911|110|118|119|Defesa Civil 114; Polícia Nacional 120
 Brasil|🇧🇷|S||190|192|193|Polícia Federal 194; Polícia Rodoviária Federal 191; Polícia Rodoviária Estadual 198; Polícia Civil 197; Defesa Civil 199; Guarda Municipal 153; Violência contra a mulher 180; Direitos Humanos 100; Apoio emocional (CVV) 188; No celular, 112 e 911 redirecionam ao 190
 Canadá|🇨🇦|N|911||||Prevenção ao suicídio 988; Serviços sociais 211
