@@ -129,7 +129,7 @@ section>*{flex-shrink:0}#dcat{flex-wrap:wrap;overflow:visible}
 <div class="chips" id="tbtn"><button class="chip" id="tcp">Copiar</button><button class="chip" id="tsp">🔊 Ouvir</button><button class="chip" id="tai" hidden>✨ Melhorar com IA</button><button class="chip" id="tcl">✕ Limpar</button></div>
 <div class="sugs" id="ex" style="margin-top:10px"></div>
 <p class="note" id="miss" style="margin-top:0"></p>
-<p class="note">Tradução offline aproximada: entende frases comuns e mais de 1500 palavras e expressões. Não ajusta gênero nem ordem das palavras. Para frases livres, use ✨ Melhorar com IA dentro do claude.ai.</p>
+<p class="note">Tradução offline aproximada: entende frases comuns e mais de 1600 palavras e expressões. Não ajusta gênero nem ordem das palavras. Para frases livres, use ✨ Melhorar com IA dentro do claude.ai.</p>
 </section>
 <section id="s-ch">
 <h2>Conversa com Explication</h2>
@@ -203,7 +203,7 @@ section>*{flex-shrink:0}#dcat{flex-wrap:wrap;overflow:visible}
 <div class="card"><b>Contadores</b><p id="acnt" style="margin:6px 0 10px"></p><button class="btn" id="ars">Reset de Segurança</button><p class="note" id="arm"></p></div>
 </div>
 <script>
-var LANGS=[["pt","Português","🇧🇷"],["en","Inglês","🇺🇸"],["es","Espanhol","🇲🇽"],["fr","Francês","🇨🇦"],["nl","Holandês","🇸🇷"]];
+var LANGS=[["pt","Português","🇧🇷"],["en","Inglês","🇺🇸"],["es","Espanhol","🇲🇽"],["fr","Francês","🇨🇦"],["nl","Holandês Surinamês","🇸🇷"]];
 var RAW=`olá|hello|hola|bonjour|hallo
 oi|hi|hola|salut|hoi
 bom dia|good morning|buenos días|bonjour|goedemorgen
@@ -1704,7 +1704,107 @@ pôr do sol|sunset|puesta de sol|coucher du soleil|zonsondergang
 crepúsculo|twilight|crepúsculo|crépuscule|schemering
 madrugada|early morning|madrugada|petit matin|vroege ochtend
 meio da tarde|mid-afternoon|media tarde|milieu d'après-midi|halverwege de middag
-fim de tarde|late afternoon|atardecer|fin d'après-midi|late middag`;
+fim de tarde|late afternoon|atardecer|fin d'après-midi|late middag
+olhe|look|mire|regardez|kijk
+espere|wait|espera|attendez|wacht
+pare|stop|para|arrêtez|stop
+cuidado|careful|cuidado|attention|voorzichtig
+ajude|help|ayuda|aidez|help
+escute|listen|escucha|écoutez|luister
+fale|speak|habla|parlez|spreek
+diga|say|di|dites|zeg
+peça|ask for|pide|demandez|vraag
+sente-se|sit down|siéntese|asseyez-vous|ga zitten
+levante-se|stand up|levántese|levez-vous|sta op
+abra|open|abra|ouvrez|open
+feche|close|cierre|fermez|sluit
+pegue|take|tome|prenez|neem
+traga|bring|traiga|apportez|breng
+calmo|calm|tranquilo|calme|kalm
+nervoso|nervous|nervioso|nerveux|nerveus
+preocupado|worried|preocupado|inquiet|bezorgd
+sério|serious|serio|sérieux|serieus
+tímido|shy|tímido|timide|verlegen
+generoso|generous|generoso|généreux|royaal
+criativo|creative|creativo|créatif|creatief
+disponível|available|disponible|disponible|beschikbaar
+indisponível|unavailable|no disponible|indisponible|niet beschikbaar
+obrigatório|mandatory|obligatorio|obligatoire|verplicht
+proibido|forbidden|prohibido|interdit|verboden
+permitido|allowed|permitido|autorisé|toegestaan
+recente|recent|reciente|récent|recent
+completo|complete|completo|complet|compleet
+incompleto|incomplete|incompleto|incomplet|onvolledig
+exato|exact|exacto|exact|exact
+aproximado|approximate|aproximado|approximatif|bij benadering
+principal|main|principal|principal|belangrijkste
+único|unique|único|unique|uniek
+comum|common|común|commun|gewoon
+raro|rare|raro|rare|zeldzaam
+morno|lukewarm|tibio|tiède|lauw
+gelado|icy cold|helado|glacé|ijskoud
+úmido|humid|húmedo|humide|vochtig
+ensolarado|sunny|soleado|ensoleillé|zonnig
+nublado|cloudy|nublado|nuageux|bewolkt
+chuvoso|rainy|lluvioso|pluvieux|regenachtig
+ventoso|windy|ventoso|venteux|winderig
+garoa|drizzle|llovizna|bruine|motregen
+granizo|hail|granizo|grêle|hagel
+orvalho|dew|rocío|rosée|dauw
+poça|puddle|charco|flaque|plas
+lama|mud|barro|boue|modder
+poeira|dust|polvo|poussière|stof
+brasa|ember|brasa|braise|gloeiende kool
+faísca|spark|chispa|étincelle|vonk
+tinta|ink|tinta|encre|inkt
+pincel|paintbrush|pincel|pinceau|penseel
+escultura|sculpture|escultura|sculpture|beeldhouwwerk
+exposição|exhibition|exposición|exposition|tentoonstelling
+plateia|audience|público|public|publiek
+palco|stage|escenario|scène|podium
+aplauso|applause|aplauso|applaudissements|applaus
+ensaio|rehearsal|ensayo|répétition|repetitie
+máquina|machine|máquina|machine|machine
+ferramenta|tool|herramienta|outil|gereedschap
+parafuso|screw|tornillo|vis|schroef
+prego|nail|clavo|clou|spijker
+corda|rope|cuerda|corde|touw
+corrente|chain|cadena|chaîne|ketting
+cadeado|padlock|candado|cadenas|hangslot
+fechadura|lock|cerradura|serrure|slot
+campainha|doorbell|timbre|sonnette|deurbel
+caixa de correio|mailbox|buzón|boîte aux lettres|brievenbus
+varanda|balcony|balcón|balcon|balkon
+sótão|attic|ático|grenier|zolder
+porão|basement|sótano|sous-sol|kelder
+sala|living room|sala|salon|woonkamer
+quintal|backyard|patio|cour|achtertuin
+cerca|fence|valla|clôture|hek
+poste|pole|poste|poteau|paal
+bueiro|storm drain|alcantarilla|bouche d'égout|rioolput
+obra|construction site|obra|chantier|bouwplaats
+andaime|scaffolding|andamio|échafaudage|steiger
+tijolo|brick|ladrillo|brique|baksteen
+cimento|cement|cemento|ciment|cement
+madeira|wood|madera|bois|hout
+ferro|iron|hierro|fer|ijzer
+vidro|glass material|vidrio|verre|glas
+plástico|plastic|plástico|plastique|plastic
+algodão|cotton|algodón|coton|katoen
+couro|leather|cuero|cuir|leer
+seda|silk|seda|soie|zijde
+ouro|gold metal|oro|or|goud
+cobre|copper|cobre|cuivre|koper
+aço|steel|acero|acier|staal
+saudade|longing|nostalgia|nostalgie|heimwee
+ciúme|jealousy|celos|jalousie|jaloezie
+inveja|envy|envidia|envie|afgunst
+orgulho|pride|orgullo|fierté|trots
+vergonha|shame|vergüenza|honte|schaamte
+culpa|guilt|culpa|culpabilité|schuld
+perdão|forgiveness|perdón|pardon|vergeving
+amizade|friendship|amistad|amitié|vriendschap
+confiança|trust|confianza|confiance|vertrouwen`;
 var D=RAW.split("\n").map(function(l){return l.split("|")});
 function k1(s){return s.toLowerCase().replace(/[’]/g,"'").replace(/[^a-zà-ÿœ0-9' -]/g,"").replace(/\s+/g," ").trim()}
 function k2(s){return k1(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
@@ -2292,7 +2392,7 @@ if(tip){var q=document.createElement("p");q.className="tip";q.textContent="💡 
 if(copy){var b=document.createElement("button");b.className="btn ghost";b.textContent="Copiar";b.onclick=function(){copyTxt(copy,b)};c.appendChild(b)}
 r.appendChild(c);return p}
 function dshow(i){var e=DR[i],t=e[0].charAt(0).toUpperCase()+e[0].slice(1);dcard(t,catName(e[1]),e[2],e[3],e[0]+": "+e[2]+(e[3]?" Dica: "+e[3]:""));var c=$("dres").firstChild,ix=look(0,e[0]);
-if(ix>=0){var tr=document.createElement("p");tr.className="tip";tr.textContent="🌐 Inglês: "+D[ix][1]+" · Espanhol: "+D[ix][2]+" · Francês: "+D[ix][3]+" · Holandês: "+D[ix][4];c.insertBefore(tr,c.lastChild)}
+if(ix>=0){var tr=document.createElement("p");tr.className="tip";tr.textContent="🌐 Inglês: "+D[ix][1]+" · Espanhol: "+D[ix][2]+" · Francês: "+D[ix][3]+" · Holandês Surinamês: "+D[ix][4];c.insertBefore(tr,c.lastChild)}
 var row=document.createElement("div");row.className="chips";row.style.marginTop="0";
 var f=document.createElement("button");f.className="chip";f.textContent=FAV.indexOf(e[0])>=0?"⭐ Favorito":"☆ Favoritar";f.onclick=function(){togFav(e[0],f)};row.appendChild(f);
 if(window.speechSynthesis){var sp=document.createElement("button");sp.className="chip";sp.textContent="🔊 Ouvir";sp.onclick=function(){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(e[0]+". "+e[2]);u.lang="pt-BR";speechSynthesis.speak(u)}catch(x){}};row.appendChild(sp)}
