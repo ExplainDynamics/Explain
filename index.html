@@ -2975,8 +2975,7 @@ restoreLast();
 try{var _t,_mo=new MutationObserver(function(){clearTimeout(_t);_t=setTimeout(saveLast,500)});_mo.observe($("msgs"),{childList:true,subtree:true,characterData:true})}catch(e){}
 // Anúncio real (Adsterra, banner 300x250). O script usa document.write, então roda dentro de um iframe isolado.
 var ADS={key:"2608c5cdbf345e889c51fce14199c664",src:"https://bauval.org/22/2608c5cdbf345e889c51fce14199c664",w:300,h:250};
-function adLoad(){var box=$("adbox");if(!box)return;box.innerHTML="";var f=document.createElement("iframe");f.width=ADS.w;f.height=ADS.h;f.style.border="0";f.setAttribute("title","Publicidade");f.setAttribute("scrolling","no");
-f.setAttribute("sandbox","allow-scripts allow-popups allow-popups-to-escape-sandbox");
+function adLoad(){var box=$("adbox");if(!box)return;box.innerHTML="";var f=document.createElement("iframe");f.width=ADS.w;f.height=ADS.h;f.frameBorder="0";f.scrolling="no";f.style.border="0";f.setAttribute("title","Publicidade");
 f.srcdoc='<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:transparent}</style></head><body><script>atOptions={"key":"'+ADS.key+'","format":"iframe","height":'+ADS.h+',"width":'+ADS.w+',"params":{}};<\/script><script src="'+ADS.src+'"><\/script></body></html>';box.appendChild(f)}
 function adClear(){var b=$("adbox");if(b)b.innerHTML=""}
 // Manifesto PWA (instalação depende de hospedagem com service worker)
