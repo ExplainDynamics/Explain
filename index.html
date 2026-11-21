@@ -126,7 +126,7 @@ section>*{flex-shrink:0}#dcat{flex-wrap:wrap;overflow:visible}
 <div class="chips" id="thint" style="margin-top:6px"></div>
 <div class="seg" style="margin-top:14px" role="group" aria-label="Idioma da tradução" id="toSeg"></div>
 <div id="dst" class="box out empty" aria-live="polite">A tradução aparece aqui</div>
-<div class="chips" id="tbtn"><button class="chip" id="tcp">Copiar</button><button class="chip" id="tsp">🔊 Ouvir</button><button class="chip" id="tai" hidden>✨ Melhorar com IA</button><button class="chip" id="tcl">✕ Limpar</button></div>
+<div class="chips" id="tbtn"><button class="chip" id="tcp">Copiar</button><button class="chip" id="tsp">🔊 Ouvir</button><button class="chip" id="tai">✨ Melhorar com IA</button><button class="chip" id="tcl">✕ Limpar</button></div>
 <div class="sugs" id="ex" style="margin-top:10px"></div>
 <p class="note" id="miss" style="margin-top:0"></p>
 </section>
@@ -2919,7 +2919,7 @@ if(!window.speechSynthesis)$("tsp").hidden=true;
 $("tsp").onclick=function(){var d=$("dst");if(d.classList.contains("empty"))return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(d.textContent);u.lang=["pt-BR","en-US","es-ES","fr-FR","nl-NL"][to];speechSynthesis.speak(u)}catch(e){}};
 $("tcl").onclick=function(){$("src").value="";seen="";translate();$("src").focus()};
 var aiBusy=false;
-$("tai").onclick=function(){var t=$("src").value.trim();if(!t||!SAMPLE||aiBusy||from==to)return;var d=$("dst");if(BAD.test(k2(t))){d.className="box out";d.textContent=MSG;return}
+$("tai").onclick=function(){var t=$("src").value.trim();if(!t||aiBusy||from==to)return;if(!SAMPLE){$("miss").textContent="A IA ainda não está disponível aqui. Se o claude.ai pedir permissão para usar a IA, aceite e tente de novo.";return}var d=$("dst");if(BAD.test(k2(t))){d.className="box out";d.textContent=MSG;return}
 aiBusy=true;tick();d.className="box out";d.textContent="Traduzindo…";
 SAMPLE("Traduza o texto abaixo de "+LANGS[from][1]+" para "+LANGS[to][1]+" de forma natural, mantendo sentido, tom e pontuação. Responda somente com a tradução, sem comentários.\n\nTexto:\n"+t,{cache:false,onText:function(o){d.textContent=o.text}}).then(function(x){aiBusy=false;if(x&&x.text)d.textContent=x.text;$("miss").textContent="✨ Tradução feita com IA."}).catch(function(){aiBusy=false;translate();$("miss").textContent="Não consegui usar a IA agora. Mostrando a tradução offline."})};
 // Conversa com memória do assunto e falas variadas
