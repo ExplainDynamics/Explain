@@ -8,6 +8,8 @@
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#151618" media="(prefers-color-scheme: dark)">
 <meta name="application-name" content="Explain">
+<link rel="preconnect" href="https://openrouter.ai">
+<link rel="preconnect" href="https://gen.pollinations.ai">
 <meta name="apple-mobile-web-app-title" content="Explain">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 rx=%2796%27 fill=%27%233346e0%27/%3E%3Crect x=%27110%27 y=%27170%27 width=%27292%27 height=%27172%27 rx=%2718%27 fill=%27%23fff%27/%3E%3Cg fill=%27%23fff%27 stroke=%27%233346e0%27 stroke-width=%2710%27%3E%3Cellipse cx=%27108%27 cy=%27256%27 rx=%2734%27 ry=%27106%27/%3E%3Cellipse cx=%27404%27 cy=%27256%27 rx=%2734%27 ry=%27106%27/%3E%3C/g%3E%3Cg fill=%27%233346e0%27%3E%3Crect x=%27160%27 y=%27214%27 width=%27190%27 height=%2716%27 rx=%278%27/%3E%3Crect x=%27160%27 y=%27248%27 width=%27190%27 height=%2716%27 rx=%278%27/%3E%3Crect x=%27160%27 y=%27282%27 width=%27130%27 height=%2716%27 rx=%278%27/%3E%3C/g%3E%3C/svg%3E">
@@ -2189,6 +2191,7 @@ bot(junk==5?pick(J5,"j5"):junk==10?pick(J10,"j10"):pick(J0,"j0"));return}
 if(BAD.test(k2(t))){ty.remove();bot(MSG);tick();return}
 if(CRISIS.test(n0f(t).replace(/['’.]/g,""))){ty.remove();bot(pick(CRISISMSG,"cr"));return}
 var ig=imgIntent(t);if(ig!==null){makeImage(ig,ty);return}
+var fl=fastLocal(t);if(fl!==null){ty.remove();bot(fl);tick();return}
 ask(t,ty)},650)}
 $("go").onclick=function(){sendMsg($("inp").value)};$("inp").addEventListener("keydown",function(e){if(e.key=="Enter")sendMsg(this.value)});
 ["Conte uma piada","O que é um PWA?","Explique a gravidade"].forEach(function(s){var b=document.createElement("button");b.className="chip";b.textContent=s;b.onclick=function(){sendMsg(s)};$("sugs").appendChild(b)});
@@ -2200,7 +2203,7 @@ segs();
 // ATENÇÃO: chaves "sk_" são secretas. Qualquer pessoa que abrir o site consegue ver esta chave no código.
 // Para proteger a chave, use um proxy no servidor (ex.: função da Vercel) ou uma chave pública (pk_).
 var API={dict:"https://api.dictionaryapi.dev/api/v2/entries",poll:"https://gen.pollinations.ai/text/",key:"sk_SPZ7DR0Y7zzyzFxPFbJsKsu0KduaSvwn",timeout:20000,showErrors:true,
-nem:"https://openrouter.ai/api/v1/chat/completions",nemModel:"nvidia/nemotron-3-ultra-550b-a55b:free",nemKey:"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",nemTimeout:30000};
+nem:"https://openrouter.ai/api/v1/chat/completions",nemModel:"nvidia/nemotron-3-ultra-550b-a55b:free",nemKey:"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",nemTimeout:30000,maxTokens:900,hedgeMs:4000};
 var SAMPLE=null,busy=false;
 // Monta o prompt (instrução oculta + conversa recente) e chama GET /text/{prompt}?key=...
 function pollText(msgs,plain){var sys=msgs.filter(function(m){return m.role=="system"}).map(function(m){return m.content}).join("\n"),conv=msgs.filter(function(m){return m.role!="system"}),url="",n=8;
@@ -2209,13 +2212,29 @@ else p=sys+"\n\nConversa recente:\n"+conv.slice(-n).map(function(m){return(m.rol
 url=API.poll+encodeURIComponent(p)+"?key="+encodeURIComponent(API.key);if(plain||url.length<=7000)break}
 var ctl=new AbortController(),tm=setTimeout(function(){ctl.abort()},API.timeout);
 return fetch(url,{signal:ctl.signal}).then(function(r){clearTimeout(tm);if(!r.ok)throw new Error("HTTP "+r.status);return r.text()}).then(function(t){t=String(t).trim().replace(/^Explication:\s*/i,"");if(!t)throw new Error("resposta vazia");return t})}
-// Texto: NVIDIA Nemotron 3 Ultra (OpenRouter) é o principal; se falhar ou o limite acabar, a Pollinations responde.
+// Texto: NVIDIA Nemotron 3 Ultra (OpenRouter) é o principal. A resposta aparece aos poucos (streaming).
+// Se o Nemotron falhar, o limite acabar ou demorar para começar (hedgeMs), a Pollinations responde.
 // Imagens continuam sendo feitas só pela Pollinations.
-function nemotron(msgs){var ctl=new AbortController(),tm=setTimeout(function(){ctl.abort()},API.nemTimeout);
-return fetch(API.nem,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+API.nemKey},body:JSON.stringify({model:API.nemModel,messages:msgs,max_tokens:1500,reasoning:{effort:"low"}}),signal:ctl.signal})
-.then(function(r){clearTimeout(tm);if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})
-.then(function(j){var c=j&&j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;if(!c||!String(c).trim())throw new Error("resposta vazia");return String(c).trim().replace(/^Explication:\s*/i,"")})}
-function llm(msgs,plain){return nemotron(msgs).then(function(t){API.lastSource="Nemotron";return t}).catch(function(e1){return pollText(msgs,plain).then(function(t){API.lastSource="Pollinations";return t}).catch(function(e2){throw new Error("Nemotron: "+whyErr(e1)+" | Pollinations: "+whyErr(e2))})})}
+function nemStream(msgs,signal,onText){
+return fetch(API.nem,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+API.nemKey},body:JSON.stringify({model:API.nemModel,messages:msgs,max_tokens:API.maxTokens,stream:true,reasoning:{effort:"low"}}),signal:signal})
+.then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);
+if(!r.body||!r.body.getReader)return r.json().then(function(j){var c=j&&j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;if(!c||!String(c).trim())throw new Error("resposta vazia");return String(c).trim().replace(/^Explication:\s*/i,"")});
+var rd=r.body.getReader(),dec=new TextDecoder(),buf="",acc="";
+function pump(){return rd.read().then(function(x){if(x.done)return acc;buf+=dec.decode(x.value,{stream:true});var ls=buf.split("\n");buf=ls.pop();
+ls.forEach(function(l){l=l.trim();if(l.indexOf("data:")!==0)return;var d=l.slice(5).trim();if(d=="[DONE]")return;var j;try{j=JSON.parse(d)}catch(e){return}
+if(j.error)throw new Error("HTTP "+(j.error.code||"erro"));var c=j.choices&&j.choices[0]&&j.choices[0].delta&&j.choices[0].delta.content;if(c){acc+=c;onText(acc.replace(/^Explication:\s*/i,"").trimStart())}});return pump()})}
+return pump().then(function(t){t=t.replace(/^Explication:\s*/i,"").trim();if(!t)throw new Error("resposta vazia");return t})})}
+function llm(msgs,plain,onText){return new Promise(function(resolve,reject){var done=false,gotNem=false,pollStarted=false,e1=null,e2=null,ctl=new AbortController(),hedge,tmo;
+function finish(t,src){if(done)return;done=true;clearTimeout(hedge);clearTimeout(tmo);API.lastSource=src;try{ctl.abort()}catch(e){}resolve(t)}
+function fail(){if(done||!(e1&&e2))return;done=true;clearTimeout(hedge);clearTimeout(tmo);reject(new Error("Nemotron: "+whyErr(e1)+" | Pollinations: "+whyErr(e2)))}
+function startPoll(){if(pollStarted)return;pollStarted=true;pollText(msgs,plain).then(function(t){if(!gotNem)finish(t,"Pollinations")}).catch(function(e){e2=e;fail()})}
+hedge=setTimeout(startPoll,API.hedgeMs);tmo=setTimeout(function(){if(!done)ctl.abort()},API.nemTimeout);
+nemStream(msgs,ctl.signal,function(x){if(done)return;gotNem=true;clearTimeout(hedge);if(onText)onText(x)})
+.then(function(t){if(done)return;gotNem=true;finish(t,"Nemotron")})
+.catch(function(e){if(done)return;gotNem=false;e1=e;startPoll();fail()})})}
+// Respostas imediatas (sem esperar a IA) para mensagens curtinhas e comuns
+function fastLocal(t){var n=n0f(t).replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();if(n.split(" ").length>5)return null;
+if(!/^(oi+|ola|opa|e ai|eae|bom dia|boa tarde|boa noite|tudo bem|td bem|como vai|obrigad[oa]|valeu|brigad[oa]|tchau|ate mais|ate logo|que horas|que dia|kkk+|haha+)/.test(n))return null;return reply(t)}
 // Instrução de sistema (prompt oculto) da Explication
 function sysChat(){var d=new Date(),b="Você é a Explication, a assistente inteligente do app Explain. Responda sempre em português do Brasil, de forma fluida, natural e simpática, como uma pessoa conversando: varie o jeito de começar e de terminar as respostas, evite frases repetitivas e fórmulas prontas e responda ao que foi dito. Organize a resposta em parágrafos curtos separados por uma linha em branco e use quebras de linha quando ajudar, por exemplo para separar a explicação, um exemplo e a pergunta final. Não use markdown (asteriscos, # ou crases), porque o app mostra texto simples. Pode fazer uma pergunta de volta de vez em quando. Explique de forma simples e correta "+(prem?"com mais detalhes (até 10 frases)":"em até 7 frases, em 2 ou 3 parágrafos curtos")+", com exemplos do dia a dia quando ajudar. Não invente fatos: se não souber, diga com naturalidade. Recuse com educação pedidos ofensivos ou perigosos. Use emojis variados e adequados ao assunto, de qualquer tipo (animais, comida, objetos, lugares, símbolos), em quantidade natural, sem exagerar e sem repetir sempre os mesmos.";
 if(ceo)b="Você é a Explication, assistente de tecnologia ultra eficiente do app Explain. Trate o usuário como \"Chefe / Criador\". Responda sempre em português do Brasil, direto ao ponto, em até 3 frases, com precisão técnica e sem markdown, variando o jeito de começar as respostas. Não invente fatos.";
@@ -2223,9 +2242,9 @@ return b+" O app também cria imagens quando o usuário escreve, por exemplo, \"
 function fb(){if(ceo)return pick(["Chefe, sem dados offline sobre isso. Reformule ou use o Dicionário. ⚙️","Chefe / Criador: fora do meu escopo offline. Mais contexto e eu resolvo. ⚙️","Sem resposta local para isso, Chefe. Tente o Dicionário ou detalhe a pergunta. ⚙️"],"fbc");return pick(FB,"fb")}
 // Envia a conversa para a Pollinations AI. Se a API falhar, usa a Explication local (NLG offline).
 function whyErr(e){var m=e&&e.message?e.message:"";if(/^Nemotron:/.test(m))return m;if(e&&e.name=="AbortError")return"demorou demais";if(e&&e.name=="TypeError")return"sem conexão ou bloqueado pelo navegador";if(/HTTP (401|402|403)/.test(m))return m+": chave recusada ou sem saldo";if(/HTTP 404/.test(m))return m+": endereço não encontrado";if(/HTTP 429/.test(m))return m+": limite de uso atingido";return m||"erro desconhecido"}
-function ask(t,ty){busy=true;var els=[].slice.call(document.querySelectorAll("#msgs .m")).slice(0,-1).slice(-8),ms=els.map(function(e){return{role:e.classList.contains("me")?"user":"assistant",content:e.textContent}});
+function ask(t,ty){busy=true;var els=[].slice.call(document.querySelectorAll("#msgs .m")).slice(0,-1).slice(-6),ms=els.map(function(e){return{role:e.classList.contains("me")?"user":"assistant",content:e.textContent.slice(0,600)}});
 while(ms.length&&ms[0].role!="user")ms.shift();
-llm([{role:"system",content:sysChat()}].concat(ms)).then(function(r){ty.textContent=r;busy=false;tick();$("msgs").scrollTop=1e9}).catch(function(e){busy=false;var a=reply(t);ty.remove();bot((a!==null?a:fb())+(API.showErrors?"\n\n⚠️ A IA online não respondeu ("+whyErr(e)+"). Esta resposta veio do modo offline.":""));tick()})}
+llm([{role:"system",content:sysChat()}].concat(ms),false,function(x){ty.textContent=x;$("msgs").scrollTop=1e9}).then(function(r){ty.textContent=r;busy=false;tick();$("msgs").scrollTop=1e9}).catch(function(e){busy=false;var a=reply(t);ty.remove();bot((a!==null?a:fb())+(API.showErrors?"\n\n⚠️ A IA online não respondeu ("+whyErr(e)+"). Esta resposta veio do modo offline.":""));tick()})}
 // Salvar no Pergaminho: chats salvos de verdade (abrir, renomear e apagar)
 var FOLD=["Estudos","Histórias","Geral"],curF="Estudos",saved=[],curId=null,editId=null,delId=null,openId=null,warn="";
 try{saved=JSON.parse(localStorage.getItem("exSaved")||"[]")}catch(e){saved=[]}
